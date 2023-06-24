@@ -1,0 +1,42 @@
+package com.example.demo.mapper;
+
+import com.example.demo.dto.HeaderResponse;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+@RequiredArgsConstructor
+public class CommonMapper {
+
+    private final ModelMapper modelMapper;
+
+    <T, S> S convertToEntity(T data, Class<S> type) {
+        return modelMapper.map(data, type);
+    }
+
+    <T, S> S convertToResponse(T data, Class<S> type) {
+        return modelMapper.map(data, type);
+    }
+
+    <T, S> List<S> convertToResponseList(List<T> lists, Class<S> type) {
+        return lists.stream()
+                .map(list -> convertToResponse(list, type))
+                .collect(Collectors.toList());
+    }
+
+    <T, S> HeaderResponse<S> getHeaderResponse(List<T> orders, Integer totalPages, Long totalElements, Class<S> type) {
+        List<S> orderResponses = convertToResponseList(orders, type);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("page-total-count", String.valueOf(totalPages));
+        responseHeaders.add("page-total-elements", String.valueOf(totalElements));
+        return new HeaderResponse<S>(orderResponses, responseHeaders);
+    }
+}
+
+// HttpHeaders provides methods to manipulate and access the headers of an HTTP request or response.
+// add, get, set, remove, containsKey, keySet: Retrieves a set of all header names present in the headers collection
