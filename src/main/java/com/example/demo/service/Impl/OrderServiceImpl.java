@@ -8,6 +8,7 @@ import com.example.demo.repository.OrderItemRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.PerfumeRepository;
 import com.example.demo.service.OrderService;
+import com.example.demo.service.email.MailSender;
 import graphql.schema.DataFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final PerfumeRepository perfumeRepository;
-//    private final MailSender mailSender;
+    private final MailSender mailSender;
 
     @Override
     public Order getOrderById(Long orderId) {
@@ -75,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
         String template = "order-template";
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("order", order);
-//        mailSender.sendMessageHtml(order.getEmail(), subject, template, attributes);
+        mailSender.sendMessageHtml(order.getEmail(), subject, template, attributes);
         return order;
     }
 

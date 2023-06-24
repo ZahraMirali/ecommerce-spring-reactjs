@@ -72,3 +72,10 @@ public class EmailConfiguration {
 }
 
 // application.properties: spring.mail.host, ...
+// spring.mail.host=smtp.gmail.com specifies the SMTP host for sending emails. In this case, it is set to the Gmail SMTP server, which is commonly used for sending emails from a Gmail account.
+// spring.mail.username specifies the username or email address associated with the email account used for sending emails. It is typically set to the email address of the account being used to send the emails. This property is used in conjunction with the spring.mail.password property, which specifies the password for the email account.
+
+// setPrefix("mail-templates/") indicates that the templates are located in the "mail-templates" directory.
+// setSuffix(".html") indicates that the templates have an HTML file extension.
+// setTemplateMode("HTML") specifies that the templates are written in HTML markup.
+// Thymeleaf will then process the template, substituting variables and expressions with actual values, and generate the final HTML content.
