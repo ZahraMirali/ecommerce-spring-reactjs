@@ -13,7 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -78,3 +79,5 @@ public class User {
 // targetClass specifies the class of elements in the collection
 // With EAGER fetching, the collection will be loaded immediately along with the User entity. Alternatively, you can use LAZY fetching to load the collection on-demand when it is accessed.
 // @CollectionTable specifies the details of the collection table that will be created in the database to store the elements of the collection. The name attribute defines the name of the table and the joinColumns attribute specifies the join column that links the collection table to the owning entity table
+
+// @Entity is used to mark a class as an entity, representing a persistent object that is mapped to a database table. and @Table is used to define the details of the corresponding database table.

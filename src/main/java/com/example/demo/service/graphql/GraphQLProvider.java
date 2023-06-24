@@ -2,6 +2,7 @@ package com.example.demo.service.graphql;
 
 import com.example.demo.service.OrderService;
 import com.example.demo.service.PerfumeService;
+import com.example.demo.service.UserService;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -26,6 +27,8 @@ public class GraphQLProvider {
 
     private final OrderService orderService;
 
+    private final UserService userService;
+
     @Value("classpath:graphql/schemas.graphql")
     private Resource resource;
 
@@ -48,7 +51,9 @@ public class GraphQLProvider {
                         .dataFetcher("perfumesIds", perfumeService.getAllPerfumesByIdsQuery())
                         .dataFetcher("perfume", perfumeService.getPerfumeByQuery())
                         .dataFetcher("orders", orderService.getAllOrdersByQuery())
-                        .dataFetcher("ordersByEmail", orderService.getUserOrdersByEmailQuery()))
+                        .dataFetcher("ordersByEmail", orderService.getUserOrdersByEmailQuery())
+                        .dataFetcher("users", userService.getAllUsersByQuery())
+                        .dataFetcher("user", userService.getUserByQuery()))
                 .build();
     }
 }
