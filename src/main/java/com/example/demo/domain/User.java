@@ -81,3 +81,9 @@ public class User {
 // @CollectionTable specifies the details of the collection table that will be created in the database to store the elements of the collection. The name attribute defines the name of the table and the joinColumns attribute specifies the join column that links the collection table to the owning entity table
 
 // @Entity is used to mark a class as an entity, representing a persistent object that is mapped to a database table. and @Table is used to define the details of the corresponding database table.
+// @Entity(name = "users"):
+// Scope: The name specified in @Entity is primarily used to provide an alternate name for the entity itself. It affects how the entity is referred to within the persistence context, entity queries, and other entity-related operations.
+// Impact: The name in @Entity does not directly affect the name of the corresponding database table. By default, if no @Table annotation is specified, the table name will be derived from the entity's class name.
+// @Table(name = "users"):
+// Scope: The name specified in @Table is used to define the name of the corresponding database table that the entity is mapped to.
+// Impact: The name in @Table directly affects the name of the database table. It determines how the entity's attributes are mapped to table columns and how the table is referenced in SQL queries.

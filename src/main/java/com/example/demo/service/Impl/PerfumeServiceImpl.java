@@ -1,5 +1,7 @@
 package com.example.demo.service.Impl;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.demo.domain.Perfume;
 import com.example.demo.dto.perfume.PerfumeSearchRequest;
 import com.example.demo.enums.SearchPerfume;
@@ -31,9 +33,9 @@ import static com.example.demo.constants.ErrorMessage.PERFUME_NOT_FOUND;
 public class PerfumeServiceImpl implements PerfumeService {
 
     private final PerfumeRepository perfumeRepository;
-//    private final AmazonS3 amazonS3client;
+    private final AmazonS3 amazonS3client;
 
-//    @Value("${amazon.s3.bucket.name}")
+    @Value("${amazon.s3.bucket.name}")
     private String bucketName;
 
     @Override
@@ -88,7 +90,7 @@ public class PerfumeServiceImpl implements PerfumeService {
     @Transactional
     public Perfume savePerfume(Perfume perfume, MultipartFile multipartFile) {
         if (multipartFile == null) {
-//            perfume.setFilename(amazonS3client.getUrl(bucketName, "empty.jpg").toString());
+            perfume.setFilename(amazonS3client.getUrl(bucketName, "empty.jpg").toString());
         } else {
             File file = new File(multipartFile.getOriginalFilename());
             try (FileOutputStream fos = new FileOutputStream(file)) {
@@ -97,8 +99,8 @@ public class PerfumeServiceImpl implements PerfumeService {
                 e.printStackTrace();
             }
             String fileName = UUID.randomUUID().toString() + "." + multipartFile.getOriginalFilename();
-//            amazonS3client.putObject(new PutObjectRequest(bucketName, fileName, file));
-//            perfume.setFilename(amazonS3client.getUrl(bucketName, fileName).toString());
+            amazonS3client.putObject(new PutObjectRequest(bucketName, fileName, file));
+            perfume.setFilename(amazonS3client.getUrl(bucketName, fileName).toString());
             file.delete();
         }
         return perfumeRepository.save(perfume);

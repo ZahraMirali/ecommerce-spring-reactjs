@@ -53,6 +53,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.133</version>
+		</dependency>
 <!--		Flyway and Liquibase are popular database migration tools in the Spring Boot ecosystem. They help you manage database schema changes and keep track of versioned scripts. When your Spring Boot application starts up, these tools will automatically scan the db.migration folder for any new or modified migration scripts and execute them against the target database. This ensures that your database schema stays in sync with your application as it evolves over time.-->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
@@ -88,6 +93,11 @@
 			<groupId>org.springframework.graphql</groupId>
 			<artifactId>spring-graphql-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
