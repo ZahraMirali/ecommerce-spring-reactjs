@@ -3,7 +3,7 @@ package com.example.demo.configuration;
 import com.example.demo.security.oauth2.CustomOAuth2UserService;
 import com.example.demo.security.JwtConfigurer;
 import com.example.demo.security.oauth2.OAuth2SuccessHandler;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,14 +15,28 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
 
-    private final JwtConfigurer jwtConfigurer;
-    private final OAuth2SuccessHandler oauthSuccessHandler;
-    private final CustomOAuth2UserService oAuth2UserService;
+    private JwtConfigurer jwtConfigurer;
+    private OAuth2SuccessHandler oauthSuccessHandler;
+    private CustomOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    public void setJwtConfigurer(JwtConfigurer jwtConfigurer) {
+        this.jwtConfigurer = jwtConfigurer;
+    }
+
+    @Autowired
+    public void setOauthSuccessHandler(OAuth2SuccessHandler oauthSuccessHandler) {
+        this.oauthSuccessHandler = oauthSuccessHandler;
+    }
+
+    @Autowired
+    public void setOAuth2UserService(CustomOAuth2UserService oAuth2UserService) {
+        this.oAuth2UserService = oAuth2UserService;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
