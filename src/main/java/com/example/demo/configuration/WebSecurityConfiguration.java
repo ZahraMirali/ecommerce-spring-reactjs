@@ -45,7 +45,8 @@ public class WebSecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/api/v1/auth/**",
+                        .requestMatchers(
+                                "/api/v1/auth/**",
                                 "/api/v1/auth/login",
                                 "/api/v1/registration/**",
                                 "/api/v1/perfumes/**",
@@ -55,7 +56,12 @@ public class WebSecurityConfiguration {
                                 "/websocket", "/websocket/**",
                                 "/img/**",
                                 "/static/**",
-                                "/auth/**", "/oauth2/**", "/**/*swagger*/**", "/v2/api-docs"
+                                "/auth/**",
+                                "/oauth2/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs",
+                                "/v3/api-docs/swagger-config",
+                                "/swagger-api/swagger.yaml"
                                 ).permitAll()
                         .anyRequest().authenticated()
                 )
