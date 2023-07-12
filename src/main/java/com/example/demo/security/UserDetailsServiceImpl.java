@@ -27,3 +27,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return UserPrincipal.create(user);
     }
 }
+
+// The optional value attribute of the @Service annotation allows you to specify a custom name for the bean.
+// When you use @Service without specifying a custom name, and there is only one bean of the corresponding type in the application context, you can inject it into other components simply by type without the need for the @Qualifier annotation.
+
+// LockedException is a specific type of exception that is used in the context of authentication and user account management. It is typically thrown when a user account is locked due to certain conditions, such as too many failed login attempts or administrative actions.

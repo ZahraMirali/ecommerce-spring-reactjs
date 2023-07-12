@@ -108,3 +108,7 @@ public class AdminController {
 
 // @PreAuthorize is used to specify pre-authorization rules in Spring Security.
 // hasAuthority is used to define the authorization rule.
+
+// @RequestPart annotation is suitable when you want to access individual parts of a multipart request as separate method parameters.
+// A multipart request is a type of HTTP request that allows for sending multiple parts or pieces of data within a single request. Each part within a multipart request can have its own Content-Type, allowing different types of data to be included in the same request. For example, one part may contain text data, while another part may contain binary data like an image or a file.
+// Both @RequestParam and @RequestPart can be used to handle multipart requests in Spring Boot, depending on your specific requirements. If you want to access individual parts of the multipart request as separate method parameters, @RequestPart is more appropriate. If you prefer to treat the entire request body as a single multipart parameter, you can use @RequestParam.
