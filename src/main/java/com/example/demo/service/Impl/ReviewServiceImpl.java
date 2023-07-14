@@ -39,7 +39,6 @@ public class ReviewServiceImpl implements ReviewService {
         double totalReviews = reviews.size();
         double sumRating = reviews.stream().mapToInt(Review::getRating).sum();
         perfume.setPerfumeRating(sumRating / totalReviews);
-        // When a method is annotated with @Transactional, it usually means that the method is executed within a transactional context. In this context, any changes made to the managed entities, such as the Perfume object in your case, will be synchronized with the database when the transaction is committed.
         return reviewRepository.save(review);
     }
 }
