@@ -39,6 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
         double totalReviews = reviews.size();
         double sumRating = reviews.stream().mapToInt(Review::getRating).sum();
         perfume.setPerfumeRating(sumRating / totalReviews);
+        // Perfume entity is managed by JPA. When a Perfume entity is retrieved using the findById method from the repository, it becomes managed within the current persistence context. As a result, any modifications made to the managed Perfume entity, such as calling perfume.setPerfumeRating(), will be automatically synchronized with the database when the persistence context is flushed or when the transaction is committed.
         return reviewRepository.save(review);
     }
 }
